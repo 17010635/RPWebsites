@@ -1,6 +1,8 @@
 package sg.edu.rp.c346.rpwebsites;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -96,7 +98,27 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor preEdit = sharedPref.edit();
+        int pos = spnCat.getSelectedItemPosition();
+        int pos1 = spnSubCat.getSelectedItemPosition();
+        preEdit.putInt("spinnerSelection", pos);
+        preEdit.putInt("spinnerSelection2", pos1);
+        preEdit.commit();
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor preEdit = sharedPref.edit();
+        spnCat.setSelection(sharedPref.getInt("spinnerSelection", 0));
+        spnSubCat.setSelection(sharedPref.getInt("spinnerSelection2",0));
     }
 }
