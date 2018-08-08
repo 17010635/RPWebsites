@@ -22,7 +22,7 @@ public class WebViewActivity extends AppCompatActivity {
         wvMyPage.getSettings().setAllowFileAccess(false);
         wvMyPage.getSettings().setBuiltInZoomControls(true);
         wvMyPage.getSettings().setJavaScriptEnabled(true);
-        
+
         Intent intentReceived = getIntent();
         String url = intentReceived.getStringExtra("url");
 
